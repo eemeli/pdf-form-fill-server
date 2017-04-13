@@ -1,0 +1,29 @@
+{
+  "name": "pdf-form-fill-server",
+  "version": "0.1.0",
+  "description": "A containerisable server wrapper around pdf-form-fill",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eemeli/pdf-form-fill-server.git"
+  },
+  "keywords": [
+    "pdf",
+    "pdftk",
+    "fill_form",
+    "server"
+  ],
+  "author": "Eemeli Aro <eemeli@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eemeli/pdf-form-fill-server/issues"
+  },
+  "homepage": "https://github.com/eemeli/pdf-form-fill-server#readme",
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2",
+    "pdf-form-fill": "^0.1.1"
+  }
+}
