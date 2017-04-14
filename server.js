@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 const pdfTemplateDir = process.env.PDF_TEMPLATE_DIR || 'templates'
 
 const onError = (res, error) => {
-  if (error.code === 'ENOENT' || error.message.indexOf('Unable to find file') !== -1) {
+  if (error.code === 'ENOENT') {
     res.status(404).end()
   } else {
     res.status(500).send(error.message)
@@ -35,9 +35,10 @@ app.get('/:template', (req, res) => {
 app.post('/:template', (req, res) => {
   const { template } = req.params
   const fn =`${pdfTemplateDir}/${template}`
-  let data = Object.assign({}, req.body)
-  if (typeof data === 'string') data = JSON.parse(data)
-  fill(fn, data)
+  let { fields, info = {} } = req.body
+  if (typeof fields === 'string') fields = JSON.parse(fields)
+  if (info && typeof info === 'string') info = JSON.parse(info)
+  fill(fn, fields, { info: Object.assign({ ModDate: new Date() }, info), verbose: true })
     .then(stream => {
       res.setHeader('Content-Type', 'application/pdf')
       stream.pipe(res)

@@ -1,7 +1,7 @@
 {
   "name": "pdf-form-fill-server",
-  "version": "0.1.0",
-  "description": "A containerisable server wrapper around pdf-form-fill",
+  "version": "0.2.0",
+  "description": "A server wrapper around pdf-form-fill",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -24,6 +24,6 @@
   "dependencies": {
     "body-parser": "^1.17.1",
     "express": "^4.15.2",
-    "pdf-form-fill": "^0.1.1"
+    "pdf-form-fill": "^0.2.0"
   }
 }
