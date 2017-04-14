@@ -35,10 +35,15 @@ app.get('/:template', (req, res) => {
 app.post('/:template', (req, res) => {
   const { template } = req.params
   const fn =`${pdfTemplateDir}/${template}`
-  let { fields, info = {} } = req.body
+  let { fields, info } = req.body
   if (typeof fields === 'string') fields = JSON.parse(fields)
-  if (info && typeof info === 'string') info = JSON.parse(info)
-  fill(fn, fields, { info: Object.assign({ ModDate: new Date() }, info), verbose: true })
+  if (info) {
+    if (typeof info === 'string') info = JSON.parse(info);
+    ['CreationDate', 'ModDate'].forEach(d => {
+      if (info[d]) info[d] = info[d] === 'now' ? new Date() : new Date(info[d])
+    })
+  }
+  fill(fn, fields, { info, verbose: true })
     .then(stream => {
       res.setHeader('Content-Type', 'application/pdf')
       stream.pipe(res)
